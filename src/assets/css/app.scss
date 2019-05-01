@@ -1,10 +1,26 @@
-.app {
-    .center {
-        text-align: center;
+@import 'colors';
+
+@font-face {
+    font-family: fancy;
+    src: url('../fonts/fancy.ttf');
+}
+
+body {
+    color: $primary-color;
+    margin: 0;
+
+    .fancy {
+        font-family: fancy;
     }
 
-    .container {
-        margin: 0 auto;
-        width: 1000px;
+    .app {
+        .center {
+            text-align: center;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 1000px;
+        }
     }
 }
