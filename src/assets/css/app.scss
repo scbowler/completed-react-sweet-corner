@@ -1,9 +1,12 @@
+@import 'colors';
+
 @font-face {
     font-family: fancy;
     src: url('../fonts/fancy.ttf');
 }
 
 body {
+    color: $primary-color;
     margin: 0;
 
     .fancy {
