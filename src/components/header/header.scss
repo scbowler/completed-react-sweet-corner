@@ -1,6 +1,8 @@
 @import '../../assets/css/colors';
 
 .header {
+    border-bottom: 24px solid $primary-color;
+
     .header-awning {
         background-image: url(../../assets/images/header.png);
         height: 88px;
@@ -11,10 +13,5 @@
         background-position-x: center;
         background-repeat: no-repeat;
         height: 195px;
-    }
-
-    .header-bottom-bar {
-        background-color: $primary-color;
-        height: 24px;
     }
 }
