@@ -11,7 +11,6 @@ export default props => {
 
             <div className="header-logo"/>
             <h1 className="center fancy">We deliver cupcakes for the important events in your life!</h1>
-            <div className="header-bottom-bar"/>
         </div>
     );
 }
