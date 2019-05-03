@@ -1,16 +1,37 @@
 .home {
-    background-image: url(../../assets/images/strips2.png);
-    background-position: right;
-    background-repeat: repeat-y;
+    margin-bottom: 3em;
 
-    .content {
-        padding-left: 35px;
-        text-align: justify;
-        width: 60%;
+    .content-container {
+        background-image: url(../../assets/images/strips2.png);
+        background-position: right;
+        background-repeat: repeat-y;
+        position: relative;
 
-        h2 {
-            margin: 0;
-            padding: 1em 0;
+        .content {
+            padding-left: 35px;
+            text-align: justify;
+            width: 52%;
+
+            h2 {
+                margin: 0;
+                padding: 1em 0;
+            }
+
+            p {
+                font-size: 14px;
+                margin: 0;
+                padding: 1em 0;
+            }
         }
+
+        .dots {
+            position: absolute;
+            right: 30px;
+            top: 25px;
+        }
+    }
+
+    .image-container {
+        margin-top: 1.5em;
     }
 }
