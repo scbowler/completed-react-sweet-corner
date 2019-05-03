@@ -1,0 +1,16 @@
+.home {
+    background-image: url(../../assets/images/strips2.png);
+    background-position: right;
+    background-repeat: repeat-y;
+
+    .content {
+        padding-left: 35px;
+        text-align: justify;
+        width: 60%;
+
+        h2 {
+            margin: 0;
+            padding: 1em 0;
+        }
+    }
+}
