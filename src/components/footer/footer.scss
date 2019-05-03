@@ -7,10 +7,12 @@
     background-repeat: no-repeat;
     color: #fff;
     height: 80px;
+    margin-top: 3em;
     position: relative;
 
     .copyright {
         bottom: 0;
+        font-size: .8em;
         position: absolute;
         width: 100%;
     }
@@ -20,9 +22,10 @@
         background-position-y: 2px;
         background-repeat: no-repeat;
         bottom: 30px;
+        font-size: .9em;
         position: absolute;
         right: 70px;
         text-align: right;
-        width: 125px;
+        width: 120px;
     }
 }

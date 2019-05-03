@@ -1,37 +1,10 @@
 .home {
-    margin-bottom: 3em;
-
     .content-container {
         background-image: url(../../assets/images/strips2.png);
-        background-position: right;
-        background-repeat: repeat-y;
-        position: relative;
-
-        .content {
-            padding-left: 35px;
-            text-align: justify;
-            width: 52%;
-
-            h2 {
-                margin: 0;
-                padding: 1em 0;
-            }
-
-            p {
-                font-size: 14px;
-                margin: 0;
-                padding: 1em 0;
-            }
-        }
 
         .dots {
-            position: absolute;
-            right: 30px;
-            top: 25px;
+            right: 3%;
+            top: 5%;
         }
-    }
-
-    .image-container {
-        margin-top: 1.5em;
     }
 }
