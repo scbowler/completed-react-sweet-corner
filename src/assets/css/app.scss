@@ -7,6 +7,7 @@
 
 body {
     color: $primary-color;
+    font-family: sans-serif;
     margin: 0;
 
     .fancy {
@@ -21,6 +22,37 @@ body {
         .container {
             margin: 0 auto;
             width: 1000px;
+        }
+
+        .content-container {
+            background-position: right;
+            background-repeat: repeat-y;
+            position: relative;
+
+            .content {
+                padding-left: 35px;
+                text-align: justify;
+                width: 52%;
+
+                h2 {
+                    margin: 0;
+                    padding: 1em 0;
+                }
+
+                p {
+                    font-size: 14px;
+                    margin: 0;
+                    padding: 1em 0;
+                }
+            }
+
+            .dots {
+                position: absolute;
+            }
+        }
+
+        .image-container {
+            margin-top: 1.5em;
         }
     }
 }
