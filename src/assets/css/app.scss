@@ -57,6 +57,15 @@ body {
     }
 }
 
+.btn {
+    border: none;
+    background-color: $teal;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 1em;
+}
+
 .col {
     display: inline-block;
     vertical-align: top;
@@ -74,12 +83,28 @@ body {
     color: $brown;
 }
 
+.mb-1 {
+    margin-bottom: 1em;
+}
+
+.mb-2 {
+    margin-bottom: 2em;
+}
+
+.mb-3 {
+    margin-bottom: 3em;
+}
+
 .red {
     background-color: $red;
 }
 
 .red-text {
     color: $red;
+}
+
+.right {
+    text-align: right;
 }
 
 .teal {
