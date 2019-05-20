@@ -1,6 +1,6 @@
 import types from './types';
 import axios from 'axios';
-import { withAuth } from '../helpers';
+import { withHeaders } from '../helpers';
 
 const BASE_URL = 'http://api.sc.lfzprototypes.com';
 
@@ -8,8 +8,9 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
     try {
         const resp = await axios.post(BASE_URL + `/api/cart/items/${productId}`, {
             quantity: quantity
-        }, withAuth());
+        }, withHeaders());
 
+        localStorage.setItem('cart-token', resp.data.cartToken);
         console.log('Add Item Resp:', resp);
 
     } catch(err){
@@ -17,17 +18,19 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
     }
 }
 
-// send auth headers with all requests for cart
+// send x-cart-token with all requests
+// Token will be given once you add your first product
 
+// delete /api/cart Delete currently active cart
 // delete /api/cart/:cartId Delete cart and all items in it
 // delete /api/cart/items/:itemId Delete that item
 
-// patch /api/cart/:itemId, { quantity: 2 } add 2 items to that items qty
-// put /api/cart/:itemId, { quantity: 4 } set that item qty to 4
+// patch /api/cart/:itemId, { quantity: 2 }, withHeaders() add 2 items to that items qty
+// put /api/cart/:itemId, { quantity: 4 }, , withHeaders() set that item qty to 4
 
 export const getCart = () => async dispatch => {
     try {
-        const resp = await axios.get(BASE_URL + '/api/cart', withAuth());
+        const resp = await axios.get(BASE_URL + '/api/cart', withHeaders());
 
         console.log('Get Cart Resp:', resp);
 
