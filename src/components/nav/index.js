@@ -20,11 +20,11 @@ export default props => {
             <li>
                 <Link to="/contact">Contact</Link>
             </li>
-            <li>
+            {/* <li>
                 <Link to="/cart">
                     <i className="material-icons">shopping_cart</i>
                 </Link>
-            </li>
+            </li> */}
         </ul>
     );
 }
