@@ -41,18 +41,31 @@ export const getCart = () => async dispatch => {
 
 export const getAllProducts = () => async dispatch => {
     try {
-        const { data: { products } } = await axios.get(BASE_URL + '/api/products');
+        const resp = await axios.get(BASE_URL + '/api/products');
 
         dispatch({
             type: types.GET_ALL_PRODUCTS,
-            products: products
+            products: resp.data.products
         });
-    } catch(err){
-        console.log('Get product list error:', err);
-
-        // TODO: dispatch an error for failed products request
+    } catch(err) {
+        console.log('Error getting all products:', err);
     }
 }
+
+// export const getAllProducts = () => async dispatch => {
+//     try {
+//         const { data: { products } } = await axios.get(BASE_URL + '/api/products');
+
+//         dispatch({
+//             type: types.GET_ALL_PRODUCTS,
+//             products: products
+//         });
+//     } catch(err){
+//         console.log('Get product list error:', err);
+
+//         // TODO: dispatch an error for failed products request
+//     }
+// }
 
 export const getProductDetails = (productId) => async (dispatch) => {
     try {
