@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProductItem from './product_item';
 import { getAllProducts } from '../../actions';
 import './products.scss';
 
@@ -8,14 +9,27 @@ class Products extends Component {
         this.props.getAllProducts();
     }
 
+    goToDetails(id){
+        this.props.history.push(`/products/${id}`);
+    }
+
     render(){
         const { products } = this.props;
 
-        console.log('Products from render:', products);
+        const productElements = products.map((product) => {
+            return (
+                <ProductItem 
+                    key={product.pid} 
+                    {...product} 
+                    goToDetails={this.goToDetails.bind(this, product.pid)}
+                />
+            );
+        });
 
         return (
             <div className="products">
                 <h1 className="center">Shop Our Cupcakes</h1>
+                {productElements}
             </div>
         );
     }
