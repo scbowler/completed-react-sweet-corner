@@ -21,8 +21,12 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
 // send x-cart-token with all requests
 // Token will be given once you add your first product
 
-// delete /api/cart Delete currently active cart
-// delete /api/cart/:cartId Delete cart and all items in it
+// get /api/cart Get the currently active cart
+
+// post /api/cart/items/:productId Adds item to cart, optional post data: {quantity: 2}
+
+// delete /api/cart Delete currently active cart (This is the one that should be used)
+// delete /api/cart/:cartId Delete cart and all items in it (This is for later features )
 // delete /api/cart/items/:itemId Delete that item
 
 // patch /api/cart/:itemId, { quantity: 2 }, withHeaders() add 2 items to that items qty
@@ -52,6 +56,19 @@ export const getAllProducts = () => async dispatch => {
     }
 }
 
+export const getProductDetails = productId => async dispatch => {
+    try {
+        const resp = await axios.get(`${BASE_URL}/api/products/${productId}`);
+
+        dispatch({
+            type: types.GET_PRODUCT_DETAILS,
+            product: resp.data.product
+        });
+    } catch(err) {
+        console.log('Error getting product details:', err);
+    }
+}
+
 // export const getAllProducts = () => async dispatch => {
 //     try {
 //         const { data: { products } } = await axios.get(BASE_URL + '/api/products');
@@ -67,17 +84,17 @@ export const getAllProducts = () => async dispatch => {
 //     }
 // }
 
-export const getProductDetails = (productId) => async (dispatch) => {
-    try {
-        const { data: { product } } = await axios.get(`${BASE_URL}/api/products/${productId}`);
+// export const getProductDetails = (productId) => async (dispatch) => {
+//     try {
+//         const { data: { product } } = await axios.get(`${BASE_URL}/api/products/${productId}`);
 
-        dispatch({
-            type: types.GET_PRODUCT_DETAILS,
-            product: product
-        });
-    } catch(err){
-        console.log('Error Getting product details:', err);
+//         dispatch({
+//             type: types.GET_PRODUCT_DETAILS,
+//             product: product
+//         });
+//     } catch(err){
+//         console.log('Error Getting product details:', err);
 
-        // TODO: dispatch an error for failed product details request
-    }
-}
+//         // TODO: dispatch an error for failed product details request
+//     }
+// }
