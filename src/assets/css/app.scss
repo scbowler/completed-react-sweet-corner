@@ -6,53 +6,128 @@
 }
 
 body {
-    color: $primary-color;
+    color: $brown;
     font-family: sans-serif;
     margin: 0;
 
     .fancy {
         font-family: fancy;
     }
+}
 
-    .app {
-        .center {
-            text-align: center;
-        }
+.app {
+    .center {
+        text-align: center;
+    }
 
-        .container {
-            margin: 0 auto;
-            width: 1000px;
-        }
+    .container {
+        margin: 0 auto;
+        width: 1000px;
+    }
 
-        .content-container {
-            background-position: right;
-            background-repeat: repeat-y;
-            position: relative;
+    .content-container {
+        background-position: right;
+        background-repeat: repeat-y;
+        position: relative;
 
-            .content {
-                padding-left: 35px;
-                text-align: justify;
-                width: 52%;
+        .content {
+            padding-left: 35px;
+            text-align: justify;
+            width: 52%;
 
-                h2 {
-                    margin: 0;
-                    padding: 1em 0;
-                }
-
-                p {
-                    font-size: 14px;
-                    margin: 0;
-                    padding: 1em 0;
-                }
+            h2 {
+                margin: 0;
+                padding: 1em 0;
             }
 
-            .dots {
-                position: absolute;
+            p {
+                font-size: 14px;
+                margin: 0;
+                padding: 1em 0;
             }
         }
 
-        .image-container {
-            margin-top: 1.5em;
+        .dots {
+            position: absolute;
         }
     }
+
+    .image-container {
+        margin-top: 1.5em;
+    }
+}
+
+.btn {
+    border: none;
+    background-color: $teal;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 1em;
+}
+
+.col {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.s6 {
+    width: 50%;
+}
+
+.brown {
+    background-color: $brown;
+}
+
+.brown-text {
+    color: $brown;
+}
+
+.mb-1 {
+    margin-bottom: 1em;
+}
+
+.mb-2 {
+    margin-bottom: 2em;
+}
+
+.mb-3 {
+    margin-bottom: 3em;
+}
+
+.red {
+    background-color: $red;
+}
+
+.red-text {
+    color: $red;
+}
+
+.right {
+    text-align: right;
+}
+
+.teal {
+    background-color: $teal;
+}
+
+.teal-text {
+    color: $teal;
+}
+
+.white {
+    background-color: $white;
+}
+
+.white-text {
+    color: $white;
+}
+
+.yellow {
+    background-color: $yellow;
+}
+
+.yellow-text {
+    color: $yellow
 }
