@@ -19,9 +19,9 @@ class Products extends Component {
         const productElements = products.map((product) => {
             return (
                 <ProductItem 
-                    key={product.pid} 
+                    key={product.id} 
                     {...product} 
-                    goToDetails={this.goToDetails.bind(this, product.pid)}
+                    goToDetails={this.goToDetails.bind(this, product.id)}
                 />
             );
         });

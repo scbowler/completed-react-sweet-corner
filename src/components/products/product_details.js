@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProductDetails } from '../../actions';
+import { clearProductDetails, getProductDetails } from '../../actions';
+import Money from '../general/money';
+import './product_details.scss';
 
 class ProductDetails extends Component {
     componentDidMount(){
@@ -9,14 +11,32 @@ class ProductDetails extends Component {
         getProductDetails(params.product_id);
     }
 
+    componentWillUnmount(){
+        this.props.clearProductDetails();
+    }
+
     render(){
         const { details } = this.props;
 
-        console.log('Product Details:', details);
+        if(!details){
+            return <h1 className="details-loading">Loading product</h1>;
+        }
+
+        const { caption, cost, description, image, name, pid } = details;
 
         return (
             <div className="product-details">
-                <h1>{details.name}</h1>
+                <div className="col s6 product-image center">
+                    <img src={image.url} alt={image.altText} />
+                </div>
+                
+                <div className="col s6 product-info">
+                    <h1>{name}</h1>
+                    <p className="caption fancy">{caption}</p>
+                    <h2>Description</h2>
+                    <p>{description}</p>
+                    <h1 className="right"><Money>{cost}</Money></h1>
+                </div>
             </div>
         );
     }
@@ -29,5 +49,6 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {
+    clearProductDetails: clearProductDetails,
     getProductDetails: getProductDetails
 })(ProductDetails);

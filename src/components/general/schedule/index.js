@@ -18,8 +18,6 @@ class Schedule extends Component {
     }
 
     render(){
-        console.log('State:', this.state);
-
         const { schedule } = this.state;
 
         if(!schedule.length){

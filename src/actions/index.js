@@ -18,6 +18,8 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
     }
 }
 
+export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS });
+
 // send x-cart-token with all requests
 // Token will be given once you add your first product
 
@@ -62,7 +64,7 @@ export const getProductDetails = productId => async dispatch => {
 
         dispatch({
             type: types.GET_PRODUCT_DETAILS,
-            product: resp.data.product
+            product: resp.data
         });
     } catch(err) {
         console.log('Error getting product details:', err);
