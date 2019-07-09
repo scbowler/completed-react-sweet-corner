@@ -22,7 +22,7 @@ class ProductDetails extends Component {
             return <h1 className="details-loading">Loading product</h1>;
         }
 
-        const { caption, cost, description, image, name, pid } = details;
+        const { caption, cost, description, image, name, id } = details;
 
         return (
             <div className="product-details">
@@ -36,6 +36,17 @@ class ProductDetails extends Component {
                     <h2>Description</h2>
                     <p>{description}</p>
                     <h1 className="right"><Money>{cost}</Money></h1>
+
+                    <div className="product-quantity right mb-3">
+                        <h2 className="left">Quantity</h2>
+                        <div className="quantity-controls">
+                            <button className="btn btn-quantity">-</button>
+                            <span className="quantity">1</span>
+                            <button className="btn btn-quantity">+</button>
+                        </div>
+                        
+                        <button className="btn">Add To Cart</button>
+                    </div>
                 </div>
             </div>
         );

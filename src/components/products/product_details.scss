@@ -16,5 +16,25 @@
         .caption {
             font-size: 1.5em;
         }
+
+        .product-quantity {
+            .quantity-controls {
+                align-items: center;
+                display: inline-flex;
+                width: 175px;
+
+                .btn-quantity {
+                    font-size: 1.5em;
+                    padding: 8px 14px;
+                }
+
+                .quantity {
+                    background-color: #efefef;
+                    font-size: 2em;
+                    margin: 0 10px;
+                    padding: 3px 12px;
+                }
+            }
+        }
     }
 }

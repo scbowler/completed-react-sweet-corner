@@ -72,16 +72,16 @@ body {
     vertical-align: top;
 }
 
-.s6 {
-    width: 50%;
-}
-
 .brown {
     background-color: $brown;
 }
 
 .brown-text {
     color: $brown;
+}
+
+.left {
+    text-align: left;
 }
 
 .mb-1 {
@@ -106,6 +106,10 @@ body {
 
 .right {
     text-align: right;
+}
+
+.s6 {
+    width: 50%;
 }
 
 .teal {
