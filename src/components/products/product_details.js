@@ -5,6 +5,14 @@ import Money from '../general/money';
 import './product_details.scss';
 
 class ProductDetails extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            quantity: 1
+        };
+    }
+
     componentDidMount(){
         const { getProductDetails, match: { params } } = this.props;
 
@@ -13,6 +21,22 @@ class ProductDetails extends Component {
 
     componentWillUnmount(){
         this.props.clearProductDetails();
+    }
+
+    decrementQuantity(){
+        const { quantity } = this.state;
+
+        if(quantity === 1) return;
+
+        this.setState({
+            quantity: quantity - 1
+        });
+    }
+
+    incrementQuantity(){
+        this.setState({
+            quantity: this.state.quantity + 1
+        });
     }
 
     render(){
@@ -40,9 +64,9 @@ class ProductDetails extends Component {
                     <div className="product-quantity right mb-3">
                         <h2 className="left">Quantity</h2>
                         <div className="quantity-controls">
-                            <button className="btn btn-quantity">-</button>
-                            <span className="quantity">1</span>
-                            <button className="btn btn-quantity">+</button>
+                            <button className="btn btn-quantity" onClick={this.decrementQuantity.bind(this)}>-</button>
+                            <span className="quantity">{this.state.quantity}</span>
+                            <button className="btn btn-quantity" onClick={this.incrementQuantity.bind(this)}>+</button>
                         </div>
                         
                         <button className="btn">Add To Cart</button>
