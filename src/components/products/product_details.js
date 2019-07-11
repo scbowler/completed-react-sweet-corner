@@ -33,6 +33,13 @@ class ProductDetails extends Component {
         });
     }
 
+    handleAddToCart(){
+        const { id } = this.props.details;
+        const { quantity } = this.state;
+
+        console.log(`Add ${quantity} items to cart, with product ID: ${id}`);
+    }
+
     incrementQuantity(){
         this.setState({
             quantity: this.state.quantity + 1
@@ -46,7 +53,7 @@ class ProductDetails extends Component {
             return <h1 className="details-loading">Loading product</h1>;
         }
 
-        const { caption, cost, description, image, name, id } = details;
+        const { caption, cost, description, image, name } = details;
 
         return (
             <div className="product-details">
@@ -69,7 +76,7 @@ class ProductDetails extends Component {
                             <button className="btn btn-quantity" onClick={this.incrementQuantity.bind(this)}>+</button>
                         </div>
                         
-                        <button className="btn">Add To Cart</button>
+                        <button className="btn" onClick={this.handleAddToCart.bind(this)}>Add To Cart</button>
                     </div>
                 </div>
             </div>

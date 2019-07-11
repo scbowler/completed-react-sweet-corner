@@ -18,6 +18,10 @@
         }
 
         .product-quantity {
+            button {
+                cursor: pointer;
+            }
+
             .quantity-controls {
                 align-items: center;
                 display: inline-flex;
