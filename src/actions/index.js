@@ -4,17 +4,25 @@ import { withHeaders } from '../helpers';
 
 const BASE_URL = 'http://api.sc.lfzprototypes.com';
 
+// export const addItemToCart = (productId, quantity) => async (dispatch) => {
+//     try {
+//         const resp = await axios.post(BASE_URL + `/api/cart/items/${productId}`, {
+//             quantity: quantity
+//         }, withHeaders());
+
+//         localStorage.setItem('cart-token', resp.data.cartToken);
+//         console.log('Add Item Resp:', resp);
+
+//     } catch(err){
+//         console.log('Error adding item to cart', err);
+//     }
+// }
+
 export const addItemToCart = (productId, quantity) => async (dispatch) => {
     try {
-        const resp = await axios.post(BASE_URL + `/api/cart/items/${productId}`, {
-            quantity: quantity
-        }, withHeaders());
-
-        localStorage.setItem('cart-token', resp.data.cartToken);
-        console.log('Add Item Resp:', resp);
-
-    } catch(err){
-        console.log('Error adding item to cart', err);
+        console.log('From Action Creator, quantity:', quantity, 'Product ID:', productId);
+    } catch(error){
+        console.log('Add Item To Cart Error:', error.message);
     }
 }
 

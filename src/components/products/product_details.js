@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearProductDetails, getProductDetails } from '../../actions';
+import { addItemToCart, clearProductDetails, getProductDetails } from '../../actions';
 import Money from '../general/money';
 import './product_details.scss';
 
@@ -37,7 +37,8 @@ class ProductDetails extends Component {
         const { id } = this.props.details;
         const { quantity } = this.state;
 
-        console.log(`Add ${quantity} items to cart, with product ID: ${id}`);
+        this.props.addItemToCart(id, quantity);
+        // console.log(`Add ${quantity} items to cart, with product ID: ${id}`);
     }
 
     incrementQuantity(){
@@ -91,6 +92,7 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {
+    addItemToCart: addItemToCart,
     clearProductDetails: clearProductDetails,
     getProductDetails: getProductDetails
 })(ProductDetails);
