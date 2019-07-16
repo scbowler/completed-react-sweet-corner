@@ -20,7 +20,11 @@ const BASE_URL = 'http://api.sc.lfzprototypes.com';
 
 export const addItemToCart = (productId, quantity) => async (dispatch) => {
     try {
-        console.log('From Action Creator, quantity:', quantity, 'Product ID:', productId);
+        const resp = await axios.post(`/api/cart/items/${productId}`, {
+            quantity: quantity
+        });
+
+        console.log('Add to cart response:', resp);
     } catch(error){
         console.log('Add Item To Cart Error:', error.message);
     }
