@@ -20,9 +20,16 @@ const BASE_URL = 'http://api.sc.lfzprototypes.com';
 
 export const addItemToCart = (productId, quantity) => async (dispatch) => {
     try {
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        };
+
         const resp = await axios.post(`${BASE_URL}/api/cart/items/${productId}`, {
             quantity: quantity
-        });
+        }, axiosConfig);
 
         localStorage.setItem('sc-cart-token', resp.data.cartToken);
         
