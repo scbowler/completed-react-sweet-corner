@@ -24,6 +24,8 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
             quantity: quantity
         });
 
+        localStorage.setItem('sc-cart-token', resp.data.cartToken);
+        
         console.log('Add to cart response:', resp);
     } catch(error){
         console.log('Add Item To Cart Error:', error.message);
