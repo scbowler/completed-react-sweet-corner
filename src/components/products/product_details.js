@@ -33,11 +33,16 @@ class ProductDetails extends Component {
         });
     }
 
-    handleAddToCart(){
+    // Added async
+    async handleAddToCart(){
         const { id } = this.props.details;
         const { quantity } = this.state;
 
-        this.props.addItemToCart(id, quantity);
+        // Added await
+        await this.props.addItemToCart(id, quantity);
+
+        // Added this line
+        this.props.history.push('/cart');
     }
 
     incrementQuantity(){
