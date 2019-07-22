@@ -4,20 +4,6 @@ import { withHeaders } from '../helpers';
 
 const BASE_URL = 'http://api.sc.lfzprototypes.com';
 
-// export const addItemToCart = (productId, quantity) => async (dispatch) => {
-//     try {
-//         const resp = await axios.post(BASE_URL + `/api/cart/items/${productId}`, {
-//             quantity: quantity
-//         }, withHeaders());
-
-//         localStorage.setItem('cart-token', resp.data.cartToken);
-//         console.log('Add Item Resp:', resp);
-
-//     } catch(err){
-//         console.log('Error adding item to cart', err);
-//     }
-// }
-
 export const addItemToCart = (productId, quantity) => async (dispatch) => {
     try {
         const cartToken = localStorage.getItem('sc-cart-token');
@@ -44,30 +30,33 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
 
 export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS });
 
-// send x-cart-token with all requests
-// Token will be given once you add your first product
-
-// get /api/cart Get the currently active cart
-
-// post /api/cart/items/:productId Adds item to cart, optional post data: {quantity: 2}
-
-// delete /api/cart Delete currently active cart (This is the one that should be used)
-// delete /api/cart/:cartId Delete cart and all items in it (This is for later features )
-// delete /api/cart/items/:itemId Delete that item
-
-// patch /api/cart/:itemId, { quantity: 2 }, withHeaders() add 2 items to that items qty
-// put /api/cart/:itemId, { quantity: 4 }, , withHeaders() set that item qty to 4
-
-export const getCart = () => async dispatch => {
+export const getActiveCart = () => async dispatch => {
     try {
-        const resp = await axios.get(BASE_URL + '/api/cart', withHeaders());
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        };
 
-        console.log('Get Cart Resp:', resp);
+        const resp = await axios.get(`${BASE_URL}/api/cart`, axiosConfig);
 
-    } catch(err){
-        console.log('Error getting cart:', err);
+        console.log('Get active cart server response:', resp);
+    } catch(error){
+        console.log('Get active cart error:', error);
     }
 }
+
+// export const getCart = () => async dispatch => {
+//     try {
+//         const resp = await axios.get(BASE_URL + '/api/cart', withHeaders());
+
+//         console.log('Get Cart Resp:', resp);
+
+//     } catch(err){
+//         console.log('Error getting cart:', err);
+//     }
+// }
 
 export const getAllProducts = () => async dispatch => {
     try {
