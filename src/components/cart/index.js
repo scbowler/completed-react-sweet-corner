@@ -7,8 +7,10 @@ class Cart extends Component {
     componentDidMount(){
         this.props.getActiveCart();
     }
-    
+
     render(){
+        console.log('Cart Items:', this.props.cartItems);
+
         return (
             <div>
                 <h1 className="center">Cart</h1>
@@ -17,6 +19,12 @@ class Cart extends Component {
     }
 }
 
-export default connect(null, {
+function mapStateToProps(state){
+    return {
+        cartItems: state.cart.items
+    }
+}
+
+export default connect(mapStateToProps, {
     getActiveCart: getActiveCart
 })(Cart);

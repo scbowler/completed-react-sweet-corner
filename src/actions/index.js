@@ -41,7 +41,10 @@ export const getActiveCart = () => async dispatch => {
 
         const resp = await axios.get(`${BASE_URL}/api/cart`, axiosConfig);
 
-        console.log('Get active cart server response:', resp);
+        dispatch({
+            type: types.GET_ACTIVE_CART,
+            cart: resp.data
+        });
     } catch(error){
         console.log('Get active cart error:', error);
     }
