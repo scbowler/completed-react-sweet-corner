@@ -74,6 +74,14 @@ export const getAllProducts = () => async dispatch => {
     }
 }
 
+export const getCartTotals = () => async dispatch => {
+    try {
+        console.log('Get cart totals action creator');
+    } catch(error) {
+        console.log('Error getting cart totals:', error);
+    }
+}
+
 export const getProductDetails = productId => async dispatch => {
     try {
         const resp = await axios.get(`${BASE_URL}/api/products/${productId}`);
