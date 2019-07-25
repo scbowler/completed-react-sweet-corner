@@ -76,7 +76,19 @@ export const getAllProducts = () => async dispatch => {
 
 export const getCartTotals = () => async dispatch => {
     try {
-        console.log('Get cart totals action creator');
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'x-cart-token': cartToken
+            }
+        }
+
+        const resp = await axios.get(`${BASE_URL}/api/cart/totals`, axiosConfig);
+
+        dispatch({
+            type: types.GET_CART_TOTALS,
+            total: resp.data.total
+        });
     } catch(error) {
         console.log('Error getting cart totals:', error);
     }
