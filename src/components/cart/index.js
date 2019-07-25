@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart } from '../../actions';
+import { getActiveCart } from '../../actions';
 import './cart.scss';
 
 class Cart extends Component {
     componentDidMount(){
-        this.props.getCart();
+        this.props.getActiveCart();
     }
 
     render(){
+        console.log('Cart Items:', this.props.cartItems);
+
         return (
-            <div className="center">
-                <h1>Cart</h1>
+            <div>
+                <h1 className="center">Cart</h1>
             </div>
         );
     }
 }
 
-export default connect(null, {
-    getCart: getCart
+function mapStateToProps(state){
+    return {
+        cartItems: state.cart.items
+    }
+}
+
+export default connect(mapStateToProps, {
+    getActiveCart: getActiveCart
 })(Cart);

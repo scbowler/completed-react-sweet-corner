@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clearProductDetails, getProductDetails } from '../../actions';
+import { addItemToCart, clearProductDetails, getProductDetails } from '../../actions';
 import Money from '../general/money';
 import './product_details.scss';
 
 class ProductDetails extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            quantity: 1
+        };
+    }
+
     componentDidMount(){
         const { getProductDetails, match: { params } } = this.props;
 
@@ -15,6 +23,34 @@ class ProductDetails extends Component {
         this.props.clearProductDetails();
     }
 
+    decrementQuantity(){
+        const { quantity } = this.state;
+
+        if(quantity === 1) return;
+
+        this.setState({
+            quantity: quantity - 1
+        });
+    }
+
+    // Added async
+    async handleAddToCart(){
+        const { id } = this.props.details;
+        const { quantity } = this.state;
+
+        // Added await
+        await this.props.addItemToCart(id, quantity);
+
+        // Added this line
+        this.props.history.push('/cart');
+    }
+
+    incrementQuantity(){
+        this.setState({
+            quantity: this.state.quantity + 1
+        });
+    }
+
     render(){
         const { details } = this.props;
 
@@ -22,7 +58,7 @@ class ProductDetails extends Component {
             return <h1 className="details-loading">Loading product</h1>;
         }
 
-        const { caption, cost, description, image, name, pid } = details;
+        const { caption, cost, description, image, name } = details;
 
         return (
             <div className="product-details">
@@ -36,6 +72,17 @@ class ProductDetails extends Component {
                     <h2>Description</h2>
                     <p>{description}</p>
                     <h1 className="right"><Money>{cost}</Money></h1>
+
+                    <div className="product-quantity right mb-3">
+                        <h2 className="left">Quantity</h2>
+                        <div className="quantity-controls">
+                            <button className="btn btn-quantity" onClick={this.decrementQuantity.bind(this)}>-</button>
+                            <span className="quantity">{this.state.quantity}</span>
+                            <button className="btn btn-quantity" onClick={this.incrementQuantity.bind(this)}>+</button>
+                        </div>
+                        
+                        <button className="btn" onClick={this.handleAddToCart.bind(this)}>Add To Cart</button>
+                    </div>
                 </div>
             </div>
         );
@@ -49,6 +96,7 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {
+    addItemToCart: addItemToCart,
     clearProductDetails: clearProductDetails,
     getProductDetails: getProductDetails
 })(ProductDetails);
