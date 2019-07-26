@@ -4,18 +4,35 @@ import { withHeaders } from '../helpers';
 
 const BASE_URL = 'http://api.sc.lfzprototypes.com';
 
+export const accountSignIn = user => async dispatch => {
+    try {
+        const { data } = await axios.post(`${BASE_URL}/auth/sign-in`, user, withHeaders());
+
+        localStorage.setItem('sc-auth-token', data.token);
+        localStorage.removeItem('sc-cart-token');
+        
+        dispatch({
+            type: types.USER_SIGN_IN,
+            ...data.user
+        });
+    } catch(error){
+        console.log('Error Signing In:', error);
+    }
+}
+
+export const accountSignOut = () => {
+    localStorage.removeItem('sc-auth-token');
+
+    return {
+        type: types.USER_SIGN_OUT
+    }
+}
+
 export const addItemToCart = (productId, quantity) => async (dispatch) => {
     try {
-        const cartToken = localStorage.getItem('sc-cart-token');
-        const axiosConfig = {
-            headers: {
-                'X-Cart-Token': cartToken
-            }
-        };
-
         const resp = await axios.post(`${BASE_URL}/api/cart/items/${productId}`, {
             quantity: quantity
-        }, axiosConfig);
+        }, withHeaders());
 
         localStorage.setItem('sc-cart-token', resp.data.cartToken);
 
@@ -28,18 +45,43 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
     }
 }
 
+export const userCartCheckout = () => async dispatch => {
+    try {
+        const { data } = await axios.post(`${BASE_URL}/api/orders`, null, withHeaders());
+        // console.log('Checkout Data:', data);
+
+        dispatch({
+            type: types.USER_CART_CHECKOUT,
+            orderId: data.id
+        });
+
+        return data.id;
+    } catch (error) {
+        console.log('Error With Checkout:', error);
+    }
+}
+
 export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS });
+
+export const createAccount = user => async dispatch => {
+    try {
+        const { data } = await axios.post(`${BASE_URL}/auth/create-account`, user, withHeaders());
+        
+        localStorage.setItem('sc-auth-token', data.token);
+        localStorage.removeItem('sc-cart-token');
+
+        dispatch({
+            type: types.USER_SIGN_IN,
+            ...data.user
+        });
+    } catch(error) {
+        console.log('Error:', error);
+    }
+}
 
 export const getActiveCart = () => async dispatch => {
     try {
-        const cartToken = localStorage.getItem('sc-cart-token');
-        const axiosConfig = {
-            headers: {
-                'X-Cart-Token': cartToken
-            }
-        };
-
-        const resp = await axios.get(`${BASE_URL}/api/cart`, axiosConfig);
+        const resp = await axios.get(`${BASE_URL}/api/cart`, withHeaders());
 
         dispatch({
             type: types.GET_ACTIVE_CART,
@@ -49,17 +91,6 @@ export const getActiveCart = () => async dispatch => {
         console.log('Get active cart error:', error);
     }
 }
-
-// export const getCart = () => async dispatch => {
-//     try {
-//         const resp = await axios.get(BASE_URL + '/api/cart', withHeaders());
-
-//         console.log('Get Cart Resp:', resp);
-
-//     } catch(err){
-//         console.log('Error getting cart:', err);
-//     }
-// }
 
 export const getAllProducts = () => async dispatch => {
     try {
@@ -76,21 +107,35 @@ export const getAllProducts = () => async dispatch => {
 
 export const getCartTotals = () => async dispatch => {
     try {
-        const cartToken = localStorage.getItem('sc-cart-token');
-        const axiosConfig = {
-            headers: {
-                'x-cart-token': cartToken
-            }
-        }
-
-        const resp = await axios.get(`${BASE_URL}/api/cart/totals`, axiosConfig);
+        const resp = await axios.get(`${BASE_URL}/api/cart/totals`, withHeaders());
 
         dispatch({
             type: types.GET_CART_TOTALS,
             total: resp.data.total
         });
     } catch(error) {
-        console.log('Error getting cart totals:', error);
+        // console.log('Error getting cart totals:', error);
+
+        dispatch({
+            type: types.GET_CART_TOTALS,
+            total: {
+                items: 0,
+                cost: 0
+            }
+        });
+    }
+}
+
+export const getOrderDetails = orderId => async dispatch => {
+    try {
+        const { data } = await axios.get(`${BASE_URL}/api/orders/${orderId}`, withHeaders());
+
+        dispatch({
+            type: types.GET_ORDER_DETAILS,
+            ...data
+        });
+    } catch(error) {
+        console.log('Error getting order details:', error);
     }
 }
 
@@ -107,32 +152,19 @@ export const getProductDetails = productId => async dispatch => {
     }
 }
 
-// export const getAllProducts = () => async dispatch => {
-//     try {
-//         const { data: { products } } = await axios.get(BASE_URL + '/api/products');
+export const jwtSignIn = () => async dispatch => {
+    try {
+        dispatch({
+            type: types.USER_TEMP_AUTH
+        });
 
-//         dispatch({
-//             type: types.GET_ALL_PRODUCTS,
-//             products: products
-//         });
-//     } catch(err){
-//         console.log('Get product list error:', err);
+        const { data } = await axios.get(`${BASE_URL}/auth/sign-in`, withHeaders());
 
-//         // TODO: dispatch an error for failed products request
-//     }
-// }
-
-// export const getProductDetails = (productId) => async (dispatch) => {
-//     try {
-//         const { data: { product } } = await axios.get(`${BASE_URL}/api/products/${productId}`);
-
-//         dispatch({
-//             type: types.GET_PRODUCT_DETAILS,
-//             product: product
-//         });
-//     } catch(err){
-//         console.log('Error Getting product details:', err);
-
-//         // TODO: dispatch an error for failed product details request
-//     }
-// }
+        dispatch({
+            type: types.USER_JWT_SIGN_IN,
+            ...data.user
+        });
+    } catch(error) {
+        console.log('Error in JWT Sign In');
+    }
+}
