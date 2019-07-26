@@ -13,6 +13,8 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
             }
         };
 
+        console.log('Cart Token:', cartToken);
+
         const resp = await axios.post(`${BASE_URL}/api/cart/items/${productId}`, {
             quantity: quantity
         }, axiosConfig);
