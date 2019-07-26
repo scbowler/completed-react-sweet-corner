@@ -112,6 +112,9 @@ class Cart extends Component {
                     </tbody>
                 </table>
                 {/* { this.renderCheckout()} */}
+                <div className="center mt-3">
+                    <Link to="/checkout/guest" className="btn red guest-checkout-link">Checkout As Guest</Link>
+                </div>
             </div>
         );
     }
