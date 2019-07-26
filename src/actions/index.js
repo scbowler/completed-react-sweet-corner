@@ -45,7 +45,39 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
     }
 }
 
+export const userCartCheckout = () => async dispatch => {
+    try {
+        const { data } = await axios.post(`${BASE_URL}/api/orders`, null, withHeaders());
+        // console.log('Checkout Data:', data);
+
+        dispatch({
+            type: types.USER_CART_CHECKOUT,
+            orderId: data.id
+        });
+
+        return data.id;
+    } catch (error) {
+        console.log('Error With Checkout:', error);
+    }
+}
+
 export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS });
+
+export const createAccount = user => async dispatch => {
+    try {
+        const { data } = await axios.post(`${BASE_URL}/auth/create-account`, user, withHeaders());
+        
+        localStorage.setItem('sc-auth-token', data.token);
+        localStorage.removeItem('sc-cart-token');
+
+        dispatch({
+            type: types.USER_SIGN_IN,
+            ...data.user
+        });
+    } catch(error) {
+        console.log('Error:', error);
+    }
+}
 
 export const getActiveCart = () => async dispatch => {
     try {
@@ -82,7 +114,28 @@ export const getCartTotals = () => async dispatch => {
             total: resp.data.total
         });
     } catch(error) {
-        console.log('Error getting cart totals:', error);
+        // console.log('Error getting cart totals:', error);
+
+        dispatch({
+            type: types.GET_CART_TOTALS,
+            total: {
+                items: 0,
+                cost: 0
+            }
+        });
+    }
+}
+
+export const getOrderDetails = orderId => async dispatch => {
+    try {
+        const { data } = await axios.get(`${BASE_URL}/api/orders/${orderId}`, withHeaders());
+
+        dispatch({
+            type: types.GET_ORDER_DETAILS,
+            ...data
+        });
+    } catch(error) {
+        console.log('Error getting order details:', error);
     }
 }
 

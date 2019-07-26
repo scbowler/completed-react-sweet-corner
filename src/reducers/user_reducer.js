@@ -9,7 +9,9 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, {type, ...action}) => {
     switch(type){
+        case types.USER_CREATE_ACCOUNT:
         case types.USER_JWT_SIGN_IN:
+        case types.USER_SIGN_IN:
             return { ...state, auth: true, email: action.email, id: action.pid, name: action.name };
         case types.USER_SIGN_OUT:
             return { ...DEFAULT_STATE };

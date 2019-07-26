@@ -6,6 +6,7 @@ const Input = ({autoComplete, color, input, meta, placeholder, type }) => {
     return (
         <div className={`input-field`}>
             <input {...input} autoComplete={autoComplete} className={`brown-text ${color}`}  placeholder={placeholder} type={type}/>
+            <div className="red-text">{meta.touched && meta.error}</div>
         </div>
     );
 }
