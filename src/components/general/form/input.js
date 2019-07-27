@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './form.scss';
 
-const Input = ({color, input, meta, placeholder, type }) => {
+const Input = ({autoComplete, color, input, meta, placeholder, type }) => {
     return (
         <div className={`input-field`}>
-            <input {...input} className={`brown-text ${color}`}  placeholder={placeholder} type={type}/>
+            <input {...input} autoCorrect="off" autoComplete={autoComplete} className={`brown-text ${color}`}  placeholder={placeholder} type={type}/>
         </div>
     );
 }
@@ -19,6 +19,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+    autoComplete: 'off',
     color: 'red',
     type: 'text'
 }
