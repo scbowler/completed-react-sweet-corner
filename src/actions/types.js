@@ -5,5 +5,6 @@ export default {
     GET_ACTIVE_CART: 'get_active_cart',
     GET_ALL_PRODUCTS: 'get_all_products',
     GET_CART_TOTALS: 'get_cart_totals',
+    GET_GUEST_ORDER_DETAILS: 'get_guest_order_details',
     GET_PRODUCT_DETAILS: 'get_product_details'
 };

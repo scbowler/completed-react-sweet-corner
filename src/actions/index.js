@@ -124,6 +124,21 @@ export const getCartTotals = () => async dispatch => {
     }
 }
 
+export const getGuestOrderDetails = (orderId, email) => async dispatch => {
+    try {
+        const resp = await axios.get(`${BASE_URL}/api/orders/guest/${orderId}`, {
+            params: { email }
+        });
+
+        dispatch({
+            type: types.GET_GUEST_ORDER_DETAILS,
+            ...resp.data
+        });
+    } catch(error) {
+        console.log('Error getting guest order details:', error.response);
+    }
+};
+
 export const getProductDetails = productId => async dispatch => {
     try {
         const resp = await axios.get(`${BASE_URL}/api/products/${productId}`);

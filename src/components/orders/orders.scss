@@ -1,0 +1,28 @@
+.order-details {
+    .details-container {
+        table {
+            margin: 2rem auto;
+            width: 75%;
+
+            img {
+                width: 100px;
+            }
+
+            thead {
+                th {
+                    text-align: center;
+                }
+            }
+
+            tbody {
+                td {
+                    text-align: right;
+
+                    &.product-name {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
