@@ -7,9 +7,11 @@ import './checkout.scss';
 
 class GuestCheckout extends Component {
     async handleGuestCheckout(values){
-        const orderInfo = await this.props.createGuestOrder(values);
+        const { createGuestOrder, history } = this.props;
 
-        console.log('Order Info:', orderInfo);
+        const {email, orderId} = await createGuestOrder(values);
+
+        history.push(`/orders/guest/${orderId}?email=${email}`);
     }
 
     render(){
