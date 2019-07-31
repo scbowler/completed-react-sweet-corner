@@ -1,16 +1,36 @@
 .order-details {
     .details-container {
+        .details-header {
+            margin-bottom: 3rem;
+
+            h2 {
+                margin-bottom: 0;
+            }
+
+            p {
+                margin-top: 0;
+            }
+        }
+
+        p {
+            font-size: 1.25rem;
+        }
+
         table {
             margin: 2rem auto;
-            width: 75%;
+            width: 80%;
 
             img {
-                width: 100px;
+                width: 75px;
             }
 
             thead {
                 th {
-                    text-align: center;
+                    text-align: right;
+
+                    &.header-product-name {
+                        text-align: center;
+                    }
                 }
             }
 
@@ -21,6 +41,15 @@
                     &.product-name {
                         text-align: center;
                     }
+
+                    &:last-child {
+                        font-weight: bold;
+                    }
+                }
+
+                .cart-totals {
+                    font-size: 1.6rem;
+                    font-weight: bold;
                 }
             }
         }

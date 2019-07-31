@@ -31,17 +31,16 @@ class GuestOrderDetails extends Component {
     renderOrderDetails(){
         const { order } = this.props;
 
-        console.log('Order:', order);
-
         if(!order){
             return <h2 className="center">Loading Order Information...</h2>
         }
 
         return (
             <div className="details-container">
-                <div className="center">
+                <div className="center details-header">
                     <h1>Status: <span className="yellow-text">{order.status}</span></h1>
                     <h2>Order #: <span className="red-text">{order.id}</span></h2>
+                    <p><small><em>** Save order number to check order status in the future **</em></small></p>
                 </div>
                 
                 <p><strong>Order Placed:</strong> {new Date(order.createdAt).toLocaleString()}</p>
@@ -53,7 +52,8 @@ class GuestOrderDetails extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan="2">Product</th>
+                            <th></th>
+                            <th className="header-product-name">Product</th>
                             <th>Each</th>
                             <th>Quantity</th>
                             <th>Total</th>
@@ -61,6 +61,11 @@ class GuestOrderDetails extends Component {
                     </thead>
                     <tbody>
                         {order.items.map(this.renderItemRow)}
+                        <tr className="cart-totals">
+                            <td colSpan="3">Order Totals:</td>
+                            <td>{order.itemCount}</td>
+                            <td><Money>{order.total}</Money></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -71,7 +76,7 @@ class GuestOrderDetails extends Component {
 
         return (
             <div className="order-details">
-                <h1 className="center">Guest Order Details</h1>
+                <h1 className="center"><span className="teal-text">Guest</span> Order Details</h1>
                 {this.renderOrderDetails()}
             </div>
         );
