@@ -6,11 +6,11 @@ import Money from '../general/money';
 import './cart.scss';
 
 class Cart extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.getActiveCart();
     }
 
-    goToProduct(productId){
+    goToProduct(productId) {
         this.props.history.push(`/products/${productId}`);
     }
 
@@ -40,11 +40,11 @@ class Cart extends Component {
         return <h1 className="center">Must be <Link to="/account/sign-in">Signed In</Link> to checkout</h1>;
     }
 
-    renderItem = ({each, itemId, name, productId, quantity, thumbnail, total}) => {
+    renderItem = ({ each, itemId, name, productId, quantity, thumbnail, total }) => {
         return (
             <tr className="cart-item" key={itemId} onClick={() => this.goToProduct(productId)}>
                 <td className="product-image">
-                    <img src={thumbnail.url} alt={thumbnail.altText}/>
+                    <img src={thumbnail.url} alt={thumbnail.altText} />
                 </td>
                 <td className="product-name">{name}</td>
                 <td className="product-cost">
@@ -58,7 +58,7 @@ class Cart extends Component {
         );
     }
 
-    renderMessageRow(message){
+    renderMessageRow(message) {
         return (
             <tr>
                 <td className="center" colSpan="5">
@@ -75,7 +75,7 @@ class Cart extends Component {
         let itemElements = this.renderMessageRow('Loading Cart items');
 
         if(cartItems){
-            if(cartItems.length){
+            if(cartItems.length) {
                 itemElements = cartItems.map(this.renderItem);
             } else {
                 itemElements = this.renderMessageRow('Cart Empty')
@@ -112,12 +112,15 @@ class Cart extends Component {
                     </tbody>
                 </table>
                 {this.renderCheckout()}
+                <div className="center mt-3">
+                    <Link to="/checkout/guest" className="btn red guest-checkout-link">Checkout As Guest</Link>
+                </div>
             </div>
         );
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         auth: state.user.auth,
         cartItems: state.cart.items,
