@@ -48,7 +48,6 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
 export const userCartCheckout = () => async dispatch => {
     try {
         const { data } = await axios.post(`${BASE_URL}/api/orders`, null, withHeaders());
-        // console.log('Checkout Data:', data);
 
         dispatch({
             type: types.USER_CART_CHECKOUT,
@@ -62,6 +61,36 @@ export const userCartCheckout = () => async dispatch => {
 }
 
 export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS });
+
+export const createGuestOrder = guest => async dispatch => {
+    try {
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        };
+
+        const resp = await axios.post(`${BASE_URL}/api/orders/guest`, guest, axiosConfig);
+
+        localStorage.removeItem('sc-cart-token');
+
+        dispatch({
+            type: types.CREATE_GUEST_ORDER,
+            order: {
+                id: resp.data.id,
+                message: resp.data.message
+            }
+        });
+
+        return {
+            email: guest.email,
+            orderId: resp.data.id
+        };
+    } catch (error) {
+        console.log('Error with guest checkout:', error);
+    }
+}
 
 export const createAccount = user => async dispatch => {
     try {
@@ -138,6 +167,21 @@ export const getOrderDetails = orderId => async dispatch => {
         console.log('Error getting order details:', error);
     }
 }
+
+export const getGuestOrderDetails = (orderId, email) => async dispatch => {
+    try {
+        const resp = await axios.get(`${BASE_URL}/api/orders/guest/${orderId}`, {
+            params: { email }
+        });
+
+        dispatch({
+            type: types.GET_GUEST_ORDER_DETAILS,
+            ...resp.data
+        });
+    } catch(error) {
+        console.log('Error getting guest order details:', error.response);
+    }
+};
 
 export const getProductDetails = productId => async dispatch => {
     try {
