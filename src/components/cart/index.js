@@ -32,12 +32,21 @@ class Cart extends Component {
         if(auth){
             return (
                 <div className="checkout center mt-3">
-                    <button className="btn btn-red" onClick={this.handleCheckout}>Checkout</button>
+                    <button className="btn btn-red checkout-link" onClick={this.handleCheckout}>Checkout</button>
                 </div>
             );
         }
 
-        return <h1 className="center">Must be <Link to="/account/sign-in">Signed In</Link> to checkout</h1>;
+        return (
+            <div className="mt-3">
+                <div className="center col s6">
+                    <Link to="/checkout/guest" className="btn red checkout-link">Checkout As Guest</Link>
+                </div>
+                <div className="center col s6">
+                    <Link to="/account/sign-in" className="btn yellow checkout-link">Sign In</Link>
+                </div>
+            </div>
+        );
     }
 
     renderItem = ({ each, itemId, name, productId, quantity, thumbnail, total }) => {
@@ -112,9 +121,6 @@ class Cart extends Component {
                     </tbody>
                 </table>
                 {this.renderCheckout()}
-                <div className="center mt-3">
-                    <Link to="/checkout/guest" className="btn red guest-checkout-link">Checkout As Guest</Link>
-                </div>
             </div>
         );
     }

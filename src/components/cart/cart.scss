@@ -57,7 +57,9 @@
         }
     }
 
-    .guest-checkout-link {
+    .checkout-link {
+        display: inline-block;
         font-size: 1.5em;
+        width: 80%;
     }
 }

@@ -64,14 +64,7 @@ export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS })
 
 export const createGuestOrder = guest => async dispatch => {
     try {
-        const cartToken = localStorage.getItem('sc-cart-token');
-        const axiosConfig = {
-            headers: {
-                'X-Cart-Token': cartToken
-            }
-        };
-
-        const resp = await axios.post(`${BASE_URL}/api/orders/guest`, guest, axiosConfig);
+        const resp = await axios.post(`${BASE_URL}/api/orders/guest`, guest, withHeaders());
 
         localStorage.removeItem('sc-cart-token');
 

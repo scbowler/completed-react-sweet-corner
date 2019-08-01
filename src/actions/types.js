@@ -8,6 +8,7 @@ export default {
     GET_GUEST_ORDER_DETAILS: 'get_guest_order_details',
     GET_ORDER_DETAILS: 'get_order_details',
     GET_PRODUCT_DETAILS: 'get_product_details',
+    GET_USER_ORDER_LIST: 'get_user_order_list',
     USER_CART_CHECKOUT: 'cart_checkout',
     USER_CREATE_ACCOUNT: 'user_create_account',
     USER_JWT_SIGN_IN: 'user_jwt_sign_in',
